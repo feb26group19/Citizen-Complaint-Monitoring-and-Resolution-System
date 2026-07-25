@@ -10,18 +10,18 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="ngo")
+@Table(name = "ngo")
 public class Ngo {
 
     @Id
-    @Column(name="ngo_id")
+    @Column(name = "ngo_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ngoId;
 
-    @Column(name="ngo_name")
+    @Column(name = "ngo_name")
     private String ngoName;
 
-    @Column(name="reg_no")
+    @Column(name = "reg_no")
     private String regNo;
 
     private String address;
@@ -31,64 +31,62 @@ public class Ngo {
     private String email;
 
     @OneToOne
-    @JoinColumn(name="uid")
+    @JoinColumn(name = "uid")
     private User user;
 
-	public int getNgoId() {
-		return ngoId;
-	}
+    public int getNgoId() {
+        return ngoId;
+    }
 
-	public void setNgoId(int ngoId) {
-		this.ngoId = ngoId;
-	}
+    public void setNgoId(int ngoId) {
+        this.ngoId = ngoId;
+    }
 
-	public String getNgoName() {
-		return ngoName;
-	}
+    public String getNgoName() {
+        return ngoName;
+    }
 
-	public void setNgoName(String ngoName) {
-		this.ngoName = ngoName;
-	}
+    public void setNgoName(String ngoName) {
+        this.ngoName = ngoName;
+    }
 
-	public String getRegNo() {
-		return regNo;
-	}
+    public String getRegNo() {
+        return regNo;
+    }
 
-	public void setRegNo(String regNo) {
-		this.regNo = regNo;
-	}
+    public void setRegNo(String regNo) {
+        this.regNo = regNo;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-    
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
