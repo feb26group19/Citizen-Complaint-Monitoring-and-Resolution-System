@@ -1,0 +1,101 @@
+:root {
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  line-height: 1.5;
+
+  font-weight: 400;
+
+  color: #212529;
+
+  background-color: #ffffff;
+
+  font-synthesis: none;
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+
+body {
+
+  margin: 0;
+
+  min-width: 320px;
+
+  min-height: 100vh;
+
+  background-color: #ffffff;
+
+}
+
+
+#root {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+}
+
+
+/* Remove default heading conflicts */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+/* Form improvements */
+
+input,
+select,
+button {
+
+  font-family: inherit;
+
+}
+
+
+/* Make cards responsive */
+
+.card {
+
+  border-radius: 12px;
+
+}
+
+
+/* Better mobile spacing */
+
+@media(max-width:768px){
+
+  .container-fluid {
+
+    padding-left: 15px;
+
+    padding-right: 15px;
+
+  }
+
+}
