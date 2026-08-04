@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.dto.CitizenRegistrationDTO;
 import com.example.demo.dto.LoginRequestDTO;
 import com.example.demo.dto.LoginResponseDTO;
 import com.example.demo.dto.NgoRegistrationDTO;
@@ -14,6 +15,7 @@ import com.example.demo.dto.OfficerRegistrationDTO;
 import com.example.demo.entity.Ngo;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
+
 
 @RestController
 @RequestMapping("/users")
@@ -76,5 +78,23 @@ public class UserController {
             @PathVariable int ngoId) {
 
         return userService.rejectNgo(ngoId);
+    }
+    @PostMapping("/registerCitizen")
+    public ResponseEntity<?> registerCitizen(
+            @RequestBody CitizenRegistrationDTO dto) {
+
+        try {
+
+            String message =
+                    userService.registerCitizen(dto);
+
+            return ResponseEntity.ok(message);
+
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 }
