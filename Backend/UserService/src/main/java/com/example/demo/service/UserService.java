@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.CitizenRegistrationDTO;
 import com.example.demo.dto.LoginResponseDTO;
 import com.example.demo.dto.NgoRegistrationDTO;
 import com.example.demo.dto.OfficerRegistrationDTO;
@@ -194,5 +195,47 @@ public class UserService {
         ngoRepository.save(ngo);
 
         return "NGO Rejected Successfully";
+    }
+    public String registerCitizen(CitizenRegistrationDTO dto) {
+
+        // Username check
+        if(userRepository.findByUname(dto.getUname()).isPresent()) {
+            throw new RuntimeException("Username already exists");
+        }
+
+        // Email check
+        if(userRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new RuntimeException("Email already registered");
+        }
+
+        // Phone validation
+        if(dto.getPhone() == null ||
+           !dto.getPhone().matches("\\d{10}")) {
+            throw new RuntimeException("Phone number must be 10 digits");
+        }
+
+        // Password validation
+        if(dto.getPassword() == null ||
+           dto.getPassword().length() < 6) {
+            throw new RuntimeException("Password must contain at least 6 characters");
+        }
+
+        Role role = roleRepository.findById(2)
+                .orElseThrow(() ->
+                        new RuntimeException("Citizen Role Not Found"));
+
+        User user = new User();
+
+        user.setUname(dto.getUname());
+        user.setPassword(dto.getPassword());
+        user.setFullname(dto.getFullname());
+        user.setAddress(dto.getAddress());
+        user.setPhone(dto.getPhone());
+        user.setEmail(dto.getEmail());
+        user.setRole(role);
+
+        userRepository.save(user);
+
+        return "Citizen Registered Successfully";
     }
 }
