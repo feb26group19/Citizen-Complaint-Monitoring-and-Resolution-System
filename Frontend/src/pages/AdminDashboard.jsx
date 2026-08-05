@@ -19,9 +19,9 @@ export default function AdminDashboard() {
       path: "/admin/departments",
     },
     {
-  label: "💬 View Feedback",
-  path: "/admin/feedback",
-},
+      label: "💬 View Feedback",
+      path: "/admin/feedback",
+    },
     {
       label: "👮 Register Officer",
       path: "/admin/officers",
