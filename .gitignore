@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Build and generated files
+Frontend/.vite/
+**/target/
+**/.classpath
+**/.project
+**/.settings/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -45,6 +45,15 @@ export default function SubmitComplaint() {
 
     e.preventDefault();
 
+    // Validation: Future date is not allowed
+    const selectedDate = new Date(formData.sinceWhen);
+    const currentDate = new Date();
+
+    if (selectedDate > currentDate) {
+      setMessage("❌ Future date is not allowed. Please select a past or current date.");
+      return;
+    }
+
     const response = await fetch(
       "http://localhost:8082/complaints/register",
       {
@@ -166,6 +175,7 @@ export default function SubmitComplaint() {
             name="sinceWhen"
             value={formData.sinceWhen}
             onChange={handleChange}
+            max={new Date().toISOString().slice(0, 16)}
             required
           />
 
@@ -220,7 +230,13 @@ export default function SubmitComplaint() {
 
       {message &&
 
-        <div className="alert alert-success mt-3">
+        <div
+          className={`alert mt-3 ${
+            message.includes("Future date")
+              ? "alert-danger"
+              : "alert-success"
+          }`}
+        >
           {message}
         </div>
 

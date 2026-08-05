@@ -10,7 +10,7 @@ import com.example.demo.repository.LocationRepository;
 
 @RestController
 @RequestMapping("/location")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("*")
 public class LocationController {
 
     @Autowired

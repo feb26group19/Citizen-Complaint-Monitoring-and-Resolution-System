@@ -40,18 +40,15 @@ public class UserService {
 
         User user = userRepository.findByUnameAndPassword(uname, password);
 
-        System.out.println("User = " + user);
-
         if (user == null) {
             throw new RuntimeException("Invalid Username or Password");
         }
 
-        System.out.println("RID = " + user.getRole().getRid());
+        Ngo ngo = null;   // <-- IMPORTANT
 
-        // NGO Validation
         if (user.getRole().getRid() == 3) {
 
-            Ngo ngo = ngoRepository.findByUser(user);
+            ngo = ngoRepository.findByUser(user);
 
             System.out.println("NGO = " + ngo);
 
@@ -59,7 +56,7 @@ public class UserService {
                 throw new RuntimeException("NGO details not found.");
             }
 
-            System.out.println("Approval Status = " + ngo.getApprovalStatus());
+            System.out.println("NGO ID = " + ngo.getNgoId());
 
             if ("PENDING".equalsIgnoreCase(ngo.getApprovalStatus())) {
                 throw new RuntimeException("Your NGO registration is pending admin approval.");
@@ -76,26 +73,21 @@ public class UserService {
         response.setRid(user.getRole().getRid());
         response.setFullname(user.getFullname());
 
-        // Officer Login
-        if(user.getRole().getRid() == 4)
-        {
-            Department dept =
-                    departmentRepository.findByOfficerName(
-                            user.getFullname());
-
-            System.out.println("Officer Fullname = " + user.getFullname());
-            System.out.println("Department Found = " + dept);
-
-            if(dept != null)
-            {
-                System.out.println("Dept ID = " + dept.getDeptId());
-
-                response.setDeptId(
-                        dept.getDeptId());
-            }
+        // ADD THIS
+        if (ngo != null) {
+            response.setNgoId(ngo.getNgoId());
         }
 
-        System.out.println("Login Successful");
+        // Officer Login
+        if (user.getRole().getRid() == 4) {
+
+            Department dept =
+                    departmentRepository.findByOfficerName(user.getFullname());
+
+            if (dept != null) {
+                response.setDeptId(dept.getDeptId());
+            }
+        }
 
         return response;
     }
@@ -238,4 +230,5 @@ public class UserService {
 
         return "Citizen Registered Successfully";
     }
+    
 }
