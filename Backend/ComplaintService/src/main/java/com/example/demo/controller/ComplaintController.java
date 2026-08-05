@@ -17,6 +17,9 @@ import com.example.demo.dto.StatusUpdateDTO;
 import com.example.demo.entity.Complaint;
 import com.example.demo.service.ComplaintService;
 
+import com.example.demo.dto.FeedbackDTO;
+import com.example.demo.entity.Feedback;
+
 @RestController
 @RequestMapping("/complaints")
 @CrossOrigin("*")
@@ -24,6 +27,7 @@ public class ComplaintController {
 
     @Autowired
     private ComplaintService complaintService;
+
 
     @PostMapping("/register")
     public String registerComplaint(
@@ -57,4 +61,17 @@ public class ComplaintController {
     {
         return complaintService.getDepartmentComplaints(deptId);
     }
+    @PostMapping("/feedback")
+    public String submitFeedback(@RequestBody FeedbackDTO dto) {
+        return complaintService.addFeedback(dto);
+    }
+    @GetMapping("/feedback/all")
+    public List<Feedback> getAllFeedback() {
+        return complaintService.getAllFeedback();
+    }
+    @GetMapping("/feedback/officer/{deptId}")
+    public List<Feedback> getOfficerFeedback(@PathVariable int deptId) {
+        return complaintService.getDepartmentFeedback(deptId);
+    }
+    
 }
